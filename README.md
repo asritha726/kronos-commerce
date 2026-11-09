@@ -1,6 +1,5 @@
 # KRONOS Commerce — Order & Inventory System
 
-[![CI Build & Verify](https://github.com/asritha726/kronos-commerce/actions/workflows/ci.yml/badge.svg)](https://github.com/asritha726/kronos-commerce/actions)
 [![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/asritha726/kronos-commerce)
 
 A production-grade, minimalist Order & Inventory management system built with:
