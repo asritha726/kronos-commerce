@@ -1,5 +1,8 @@
 # KRONOS Commerce — Order & Inventory System
 
+[![CI Build & Verify](https://github.com/asritha726/kronos-commerce/actions/workflows/ci.yml/badge.svg)](https://github.com/asritha726/kronos-commerce/actions)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/asritha726/kronos-commerce)
+
 A production-grade, minimalist Order & Inventory management system built with:
 - **Backend:** Java (Port `8080`)
 - **Authentication:** Secure Email & Password (Log In & Sign Up with SHA-256 password hashing)
@@ -57,3 +60,12 @@ Project/
 3. Log in with:
    - **Email:** `manager@example.com` / **Password:** `admin123`
    - Or click the **Sign Up** tab to create a brand-new store manager account!
+
+---
+
+## ☁️ 1-Click Cloud Deployment (Render)
+
+1. Click the **Deploy to Render** button above, or go to **[render.com](https://render.com)**.
+2. Connect your GitHub repository `asritha726/kronos-commerce`.
+3. Render automatically reads `render.yaml` and builds the Docker container.
+4. Your application will be live at `https://kronos-commerce.onrender.com`!
