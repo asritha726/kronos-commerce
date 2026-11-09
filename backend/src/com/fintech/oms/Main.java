@@ -24,7 +24,16 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Port 8080 - Order & Inventory Management System (Normal Email/Password Auth)
  */
 public class Main {
-    private static final int PORT = 8080;
+    private static int getPort() {
+        String env = System.getenv("PORT");
+        if (env != null && !env.trim().isEmpty()) {
+            try {
+                return Integer.parseInt(env.trim());
+            } catch (NumberFormatException ignored) {}
+        }
+        return 8080;
+    }
+
     private static final String DATA_FILE = "data/oms_db.json";
 
     private static final List<Product> products = new CopyOnWriteArrayList<>();
@@ -39,7 +48,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         loadData();
 
-        HttpServer server = HttpServer.create(new InetSocketAddress(PORT), 0);
+        int port = getPort();
+        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        System.out.println("KRONOS Commerce server running on port " + port);
 
         // 1. AUTHENTICATION (Normal Login & Sign Up)
         server.createContext("/api/auth", new HttpHandler() {
@@ -379,8 +390,8 @@ public class Main {
         System.out.println("=========================================================");
         System.out.println("  KRONOS Commerce - Order & Inventory Engine             ");
         System.out.println("=========================================================");
-        System.out.println("Server running on port: " + PORT);
-        System.out.println("Open your browser at:   http://localhost:" + PORT);
+        System.out.println("Server running on port: " + port);
+        System.out.println("Open your browser at:   http://localhost:" + port);
         System.out.println("=========================================================");
     }
 
