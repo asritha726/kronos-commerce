@@ -378,6 +378,12 @@ public class Main {
 
                 byte[] bytes = Files.readAllBytes(filePath);
                 ex.getResponseHeaders().set("Content-Type", contentType);
+
+                if ("HEAD".equalsIgnoreCase(ex.getRequestMethod())) {
+                    ex.sendResponseHeaders(200, -1);
+                    return;
+                }
+
                 ex.sendResponseHeaders(200, bytes.length);
                 try (OutputStream os = ex.getResponseBody()) {
                     os.write(bytes);
