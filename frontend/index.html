@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KRONOS | Commerce</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        
+        <!-- ============================================== -->
+        <!-- 1. AUTHENTICATION DIALOG (Login / Sign Up)     -->
+        <!-- ============================================== -->
+        <div id="authScreen" class="auth-wrapper">
+            <div class="auth-card">
+                
+                <!-- Brand Header -->
+                <div class="auth-brand">
+                    <span class="brand-title">KRONOS</span>
+                    <span class="brand-tag">COMMERCE</span>
+                </div>
+
+                <!-- Tabs: Log In vs Sign Up -->
+                <div class="auth-tabs">
+                    <button id="tabBtnLogin" class="auth-tab active" type="button">Log In</button>
+                    <button id="tabBtnSignup" class="auth-tab" type="button">Sign Up</button>
+                </div>
+
+                <!-- Error Banner -->
+                <div id="authErrorBanner" class="auth-error-banner hidden"></div>
+
+                <!-- Normal Log In Form -->
+                <form id="formNormalLogin" class="auth-form">
+                    <div class="form-group">
+                        <label for="loginEmail">Email Address</label>
+                        <input type="email" id="loginEmail" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginPassword">Password</label>
+                        <input type="password" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Log In</button>
+                </form>
+
+                <!-- Normal Sign Up Form -->
+                <form id="formNormalSignup" class="auth-form hidden">
+                    <div class="form-group">
+                        <label for="signupName">Full Name</label>
+                        <input type="text" id="signupName" placeholder="e.g. Alex Morgan" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupEmail">Email Address</label>
+                        <input type="email" id="signupEmail" placeholder="name@company.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="signupPassword">Password</label>
+                        <input type="password" id="signupPassword" placeholder="Create a password" minlength="4" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Create Account</button>
+                </form>
+
+            </div>
+        </div>
+
+        <!-- ============================================== -->
+        <!-- 2. MAIN APPLICATION WORKSPACE                  -->
+        <!-- ============================================== -->
+        <div id="mainAppScreen" class="app-workspace hidden">
+            
+            <!-- Global Brand Header -->
+            <header class="app-header">
+                <div class="brand-left">
+                    <span class="brand-title">KRONOS</span>
+                    <span class="brand-tag">COMMERCE</span>
+                </div>
+
+                <div class="header-right">
+                    <!-- Profile Capsule -->
+                    <div class="profile-capsule" id="btnOpenProfile" title="Click to view profile">
+                        <span class="profile-avatar" id="headerAvatar">M</span>
+                        <div class="profile-meta">
+                            <span class="profile-name" id="headerUserName">Store Manager</span>
+                            <span class="profile-role" id="headerUserRole">Store Manager</span>
+                        </div>
+                    </div>
+
+                    <button id="btnLogout" class="btn btn-secondary btn-sm">Sign Out</button>
+                </div>
+            </header>
+
+            <!-- Navigation Bar -->
+            <nav class="nav-bar">
+                <button class="nav-button active" data-tab="inventory">Inventory</button>
+                <button class="nav-button" data-tab="orders">Orders</button>
+            </nav>
+
+            <!-- KPI Metric Cards -->
+            <section class="kpi-grid">
+                <div class="card kpi-card highlight-card">
+                    <span class="kpi-label">TOTAL REVENUE</span>
+                    <div class="kpi-value" id="metricTotalRevenue">$0.00</div>
+                </div>
+
+                <div class="card kpi-card">
+                    <span class="kpi-label">TOTAL ORDERS</span>
+                    <div class="kpi-value" id="metricTotalOrders">0</div>
+                </div>
+
+                <div class="card kpi-card">
+                    <span class="kpi-label">ACTIVE PRODUCTS</span>
+                    <div class="kpi-value" id="metricTotalProducts">0</div>
+                </div>
+
+                <div class="card kpi-card">
+                    <span class="kpi-label">LOW STOCK ITEMS</span>
+                    <div class="kpi-value" id="metricLowStockCount">0</div>
+                </div>
+            </section>
+
+            <!-- TAB 1: INVENTORY -->
+            <main id="tabInventory" class="tab-pane">
+                
+                <!-- Add Product -->
+                <section class="card form-card">
+                    <h2 class="card-heading">Add Product</h2>
+                    <form id="addProductForm" class="form-grid">
+                        <div class="form-group">
+                            <label for="prodName">Product Name</label>
+                            <input type="text" id="prodName" placeholder="e.g. Mechanical Keyboard" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prodSku">SKU</label>
+                            <input type="text" id="prodSku" placeholder="e.g. KB-RGB-01" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prodCategory">Category</label>
+                            <select id="prodCategory">
+                                <option value="Peripherals">Peripherals</option>
+                                <option value="Displays">Displays</option>
+                                <option value="Audio">Audio</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Components">Components</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="prodPrice">Unit Price ($)</label>
+                            <input type="number" id="prodPrice" step="0.01" min="0.01" placeholder="99.99" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prodStock">Initial Stock</label>
+                            <input type="number" id="prodStock" min="0" placeholder="10" required>
+                        </div>
+                        <div class="form-group btn-group">
+                            <button type="submit" class="btn btn-primary">+ Add Product</button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Inventory Table -->
+                <section class="card table-card">
+                    <div class="table-bar">
+                        <h2 class="card-heading">Inventory Catalog</h2>
+                        <div class="table-actions">
+                            <input type="text" id="inventorySearch" class="search-input" placeholder="Search product or SKU...">
+                            <button id="btnExportInventoryCsv" class="btn btn-secondary btn-sm" type="button">Export CSV</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>PRODUCT</th>
+                                    <th>SKU</th>
+                                    <th>CATEGORY</th>
+                                    <th class="text-right">PRICE</th>
+                                    <th class="text-right">STOCK</th>
+                                    <th>STATUS</th>
+                                    <th class="text-center">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productsTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- TAB 2: ORDERS -->
+            <main id="tabOrders" class="tab-pane hidden">
+                
+                <!-- Create Order -->
+                <section class="card form-card">
+                    <h2 class="card-heading">Create Order</h2>
+                    <form id="createOrderForm" class="form-grid">
+                        <div class="form-group">
+                            <label for="orderCustomerName">Customer Name</label>
+                            <input type="text" id="orderCustomerName" placeholder="e.g. Jane Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderCustomerEmail">Customer Email</label>
+                            <input type="email" id="orderCustomerEmail" placeholder="jane@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderProductSelect">Product</label>
+                            <select id="orderProductSelect" required></select>
+                        </div>
+                        <div class="form-group">
+                            <label for="orderQuantity">Quantity</label>
+                            <input type="number" id="orderQuantity" min="1" value="1" required>
+                        </div>
+                        <div class="form-group btn-group">
+                            <button type="submit" class="btn btn-primary">+ Place Order</button>
+                        </div>
+                    </form>
+                </section>
+
+                <!-- Orders Table -->
+                <section class="card table-card">
+                    <div class="table-bar">
+                        <h2 class="card-heading">Orders Ledger</h2>
+                        <div class="table-actions">
+                            <input type="text" id="ordersSearch" class="search-input" placeholder="Search orders...">
+                            <button id="btnExportOrdersCsv" class="btn btn-secondary btn-sm" type="button">Export CSV</button>
+                        </div>
+                    </div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>ORDER #</th>
+                                    <th>DATE</th>
+                                    <th>CUSTOMER</th>
+                                    <th>PRODUCT</th>
+                                    <th class="text-center">QTY</th>
+                                    <th class="text-right">TOTAL</th>
+                                    <th>STATUS</th>
+                                    <th class="text-center">ACTIONS</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ordersTableBody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- Minimal Footer -->
+            <footer class="app-footer">
+                <span class="brand-title">KRONOS</span>
+            </footer>
+
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- 3. USER PROFILE MODAL DIALOG                   -->
+    <!-- ============================================== -->
+    <div id="profileModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>User Profile</h3>
+                <button id="btnCloseProfile" class="btn-icon" type="button">&times;</button>
+            </div>
+            
+            <div class="profile-details">
+                <div class="profile-large-avatar" id="modalProfileAvatar">M</div>
+                <div class="profile-field-group">
+                    <div class="profile-field">
+                        <span class="field-label">NAME</span>
+                        <span class="field-value" id="modalProfileName">Alex Morgan</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">EMAIL</span>
+                        <span class="field-value font-mono" id="modalProfileEmail">manager@example.com</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">ROLE</span>
+                        <span class="field-value" id="modalProfileRole">Store Manager</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">ACCOUNT ID</span>
+                        <span class="field-value font-mono" id="modalProfileId">#1</span>
+                    </div>
+                    <div class="profile-field">
+                        <span class="field-label">MEMBER SINCE</span>
+                        <span class="field-value font-mono" id="modalProfileCreated">2026-11-01</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="btnModalSignOut" class="btn btn-secondary btn-full" type="button">Sign Out</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================== -->
+    <!-- 4. ORDER INVOICE RECEIPT MODAL                 -->
+    <!-- ============================================== -->
+    <div id="invoiceModal" class="modal-overlay hidden">
+        <div class="modal-card invoice-card">
+            <div class="modal-header">
+                <div>
+                    <span class="brand-title" style="font-size: 1.15rem;">KRONOS</span>
+                    <span class="brand-tag">INVOICE</span>
+                </div>
+                <button id="btnCloseInvoice" class="btn-icon" type="button">&times;</button>
+            </div>
+            
+            <div id="invoiceContent" class="invoice-body">
+                <!-- Populated dynamically -->
+            </div>
+
+            <div class="modal-footer" style="gap: 8px;">
+                <button class="btn btn-secondary btn-sm" onclick="window.print()" type="button">Print</button>
+                <button id="btnDismissInvoice" class="btn btn-primary btn-sm" type="button">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

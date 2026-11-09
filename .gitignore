@@ -1,0 +1,7 @@
+# Build output
+backend/bin/
+*.class
+
+# Persistent local data
+data/oms_db.json
+
